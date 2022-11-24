@@ -1,4 +1,4 @@
-
+[![CI with GitHub Actions using Maven and Spring MVC | © Budictreas](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/actions/workflows/maven-ci.yml)
 
 # Spring MVC - Book Store
 This repository is the code for Spring 5 series on [http://www.kieutrongkhanh.net](kieutrongkhanh.net) rewritten by me </br></br>
