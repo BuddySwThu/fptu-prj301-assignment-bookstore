@@ -14,4 +14,3 @@ This series is a A-Z tutorial for CRUD with Spring MVC. Consists of:
 ![Search Page of Book Store Webapp](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-11-24%20at%2014-46-38%20Search%20Page.png)
 
 ### Connect me via baontse150486@fpt.edu.vn
-# fptu-prj301-assignment-bookstore
