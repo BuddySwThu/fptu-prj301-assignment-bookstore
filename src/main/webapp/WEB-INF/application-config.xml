@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+              http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+              http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+    <context:component-scan base-package="per.budictreas.springmvc"/>
+    <mvc:annotation-driven/>
+    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="username" value="sa"/>
+        <property name="password" value="hiHihaHahoHoheHe21"/>
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+        <property name="url"
+                  value="jdbc:sqlserver://localhost:1433;databaseName=PRJ301_MVC2;instanceName=BUDDY;useUnicode=true;characterEncoding=UTF-8"/>
+    </bean>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="per.budictreas.springmvc.data"/>
+        <property name="persistenceProvider">
+            <bean class="org.hibernate.jpa.HibernatePersistenceProvider"/>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.show_sql">true</prop> <!-- false khi triển khai ứng dụng chạy thực tế.-->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+                <prop key="hibernate.physical_naming_strategy">
+                    org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+                </prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="transactionManager" name="jpaTransactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="jpaTransactionManager"/>
+    <jpa:repositories base-package="per.budictreas.springmvc.repository" entity-manager-factory-ref="entityManagerFactory"
+                      transaction-manager-ref="transactionManager"/>
+    <context:component-scan base-package="per.budictreas.springmvc"/>
+</beans>
