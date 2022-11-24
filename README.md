@@ -3,7 +3,7 @@
 # Welcome to Book-Store Repository
 This repository is related to Spring 5 series on [kieutrongkhanh.net](http://www.kieutrongkhanh.net/search/label/Spring5)</br></br>
 
-## This series is a A-Z tutorial for CRUD with Spring MVC. Consists of:
+## This series is a A-Z tutorial for C.R.U.D with Spring MVC, consists of:
     * How to config Spring MVC using xml method.
     * How to use Spring Data JPA for Persistence Layers
     * How to use create RESTful API end-point with Spring MVC
