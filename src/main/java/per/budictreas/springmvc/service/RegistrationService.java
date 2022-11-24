@@ -6,6 +6,7 @@ import per.budictreas.springmvc.data.entity.RegistrationEntity;
 import per.budictreas.springmvc.mapper.dtomapper.RegistrationDTOMapper;
 import per.budictreas.springmvc.repository.RegistrationRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -26,5 +27,14 @@ public class RegistrationService {
 
     public List<RegistrationDTO> searchByLastname(String lastname) {
         return this.registrationDTOMapper.toDTO(this.registrationRepository.getByLastnameContainingIgnoreCase(lastname));
+    }
+
+    public boolean updateUser(RegistrationDTO registrationDTO) {
+        RegistrationEntity registrationEntity = this.registrationDTOMapper.toEntity(registrationDTO);
+        if (this.registrationRepository.findById(registrationEntity.getUsername()).orElseThrow(EntityNotFoundException::new) != null) {
+            this.registrationRepository.saveAndFlush(registrationEntity);
+        }
+
+        return true;
     }
 }

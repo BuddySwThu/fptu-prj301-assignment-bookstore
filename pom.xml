@@ -19,6 +19,7 @@
         <lombok.version>1.18.24</lombok.version>
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <fasterxml-jason.version>2.14.0</fasterxml-jason.version>
+        <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
     </properties>
 
     <dependencies>
@@ -116,6 +117,11 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${fasterxml-jason.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
         </dependency>
     </dependencies>
 

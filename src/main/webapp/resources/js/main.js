@@ -22,18 +22,21 @@ function renderHeaderRegistrationRows(table) {
     var thPassword = document.createElement('th');
     var thLastName = document.createElement('th');
     var thAdmin = document.createElement('th');
+    var thUpdate = document.createElement('th');
 
     thNo.innerHTML = 'No.';
     thUsername.innerHTML = 'Username';
     thPassword.innerHTML = 'Password';
     thLastName.innerHTML = 'Last Name';
     thAdmin.innerHTML = 'Role';
+    thUpdate.innerHTML = 'Update';
 
     tr.appendChild(thNo);
     tr.appendChild(thUsername);
     tr.appendChild(thPassword);
     tr.appendChild(thLastName);
     tr.appendChild(thAdmin);
+    tr.appendChild(thUpdate);
     table.appendChild(tr);
 }
 
@@ -41,88 +44,112 @@ function renderRegistrationRows(registrations, resultTable) {
     resultTable.innerHTML = '';
     var table = document.createElement('table');
     table.setAttribute('border', 2);
-    renderHeaderRegistrationRows(table);
-    for (var i = 0; i < registrations.length; i++) {
-        var registration = registrations[i];
-        var tr = document.createElement('tr');
-        var tdNo = document.createElement('td');
-        var tdUsername = document.createElement('td');
-        var tdPassword = document.createElement('td');
-        var tdLastname = document.createElement('td');
-        var tdAdmin = document.createElement('td');
+    if (registrations != null && registrations.length !== 0) {
+        renderHeaderRegistrationRows(table);
+        for (var i = 0; i < registrations.length; i++) {
+            var registration = registrations[i];
+            var tr = document.createElement('tr');
+            var tdNo = document.createElement('td');
+            var tdUsername = document.createElement('td');
+            var tdPassword = document.createElement('td');
+            var tdLastname = document.createElement('td');
+            var tdAdmin = document.createElement('td');
+            var tdUpdate = document.createElement('td');
 
-        tdNo.innerHTML = i + 1;
-        tdUsername.innerHTML = registration.username;
-        tdPassword.innerHTML = registration.password;
-        tdLastname.innerHTML = registration.lastname;
-        tdAdmin.innerHTML = registration.role ? 'Admin' : 'User';
+            tdNo.innerHTML = i + 1;
+            tdUsername.innerHTML = '<a class="lbl-username">' + registration.username + '</a>';
+            tdPassword.innerHTML = '<input type="text" class="txt-password" value="' + registration.password + '" />';
+            tdLastname.innerHTML = '<input type="text" class="txt-lastname" value="' + registration.lastname + '" />';
+            tdAdmin.innerHTML = '<input type="checkbox" class="chk-role" ' + (registration.role ? 'checked' : '') + ' />';
 
-        tr.appendChild(tdNo);
-        tr.appendChild(tdUsername);
-        tr.appendChild(tdPassword);
-        tr.appendChild(tdLastname);
-        tr.appendChild(tdAdmin);
-        table.appendChild(tr);
+            var btnUpdate = document.createElement('button');
+            tdUpdate.appendChild(btnUpdate);
+            btnUpdate.innerHTML = 'Update';
+            btnUpdate.onclick = function (e) {
+                updateUser(e.target);
+            };
+
+            tr.appendChild(tdNo);
+            tr.appendChild(tdUsername);
+            tr.appendChild(tdPassword);
+            tr.appendChild(tdLastname);
+            tr.appendChild(tdAdmin);
+            tr.appendChild(tdUpdate);
+            table.appendChild(tr);
+        }
+        resultTable.appendChild(table);
+    } else {
+        var noRecordText = document.createElement('h2');
+        noRecordText.innerHTML = 'No record(s) matched ! ! !';
+        resultTable.appendChild(noRecordText);
     }
-    resultTable.appendChild(table);
 }
 
-//
-// function updateUser(e) {
-//     var tr = e.parentNode.parentNode;
-//     var username = tr.getElementsByClassName('lbl-username')[0];
-//     var password = tr.getElementsByClassName('txt-password')[0];
-//     var lastName = tr.getElementsByClassName('txt-lastName')[0];
-//     var role = tr.getElementsByClassName('chk-role')[0];
-//     var usernameVal = username.innerHTML;
-//     var passwordVal = password.value;
-//     var lastNameVal = lastName.value;
-//     var roleVal = role.checked;
-//     var param = {
-//         username: usernameVal,
-//         password: passwordVal,
-//         lastName: lastNameVal,
-//         role: roleVal
-//     };
-//
-//     var req = new XMLHttpRequest();
-//     req.open('PUT', './user/update-user', true);
-//     req.setRequestHeader('Content-Type', 'application/json');
-//
-//     req.onreadystatechange = function () {
-//         if (req.readyState === XMLHttpRequest.DONE) {
-//             if (req.status === 200) {
-//                 var res = JSON.parse(req.responseText);
-//                 alert(res.message);
-//                 removeValidError(tr);
-//                 search();
-//             } else if (req.status === 400) {
-//                 removeValidError(tr);
-//                 var error = JSON.parse(req.responseText);
-//                 if (error.errors.password !== undefined) {
-//                     var err = document.createElement('div');
-//                     err.innerHTML = error.errors.password;
-//                     err.className = 'password-error';
-//                     password.parentNode.appendChild(err);
-//                 }
-//
-//                 if (error.errors.lastName !== undefined) {
-//                     var err = document.createElement('div');
-//                     err.innerHTML = error.errors.lastName;
-//                     err.className = 'lastName-error';
-//                     lastName.parentNode.appendChild(err);
-//                 }
-//             } else if (req.status === 204) {
-//                 alert('User is not existed !!!');
-//             } else {
-//                 console.log('       [ERROR]:     ' + req.responseText);
-//             }
-//         }
-//     };
-//
-//     req.send(JSON.stringify(param));
-// }
-//
+
+function updateUser(e) {
+    var tr = e.parentNode.parentNode;
+    var username = tr.getElementsByClassName('lbl-username')[0];
+    var password = tr.getElementsByClassName('txt-password')[0];
+    var lastname = tr.getElementsByClassName('txt-lastname')[0];
+    var role = tr.getElementsByClassName('chk-role')[0];
+    var usernameVal = username.innerHTML;
+    var passwordVal = password.value;
+    var lastnameVal = lastname.value;
+    var roleVal = role.checked;
+
+    var param = {
+        username: usernameVal,
+        password: passwordVal,
+        lastname: lastnameVal,
+        role: roleVal
+    };
+
+    var req = new XMLHttpRequest();
+    req.open('PUT', './user/update-user', true);
+    req.setRequestHeader('Content-Type', 'application/json');
+
+    req.onreadystatechange = function () {
+        if (req.readyState === XMLHttpRequest.DONE) {
+            if (req.status === 200) {
+                var res = JSON.parse(req.responseText);
+                alert(res.message);
+                removeValidError(tr);
+                search();
+            } else if (req.status === 400) {
+                removeValidError(tr);
+                var error = JSON.parse(req.responseText);
+
+                if (error.errors.password !== undefined) {
+                    var err = document.createElement('div');
+                    err.innerHTML = error.errors.password;
+                    err.className = 'password-error';
+                    password.parentNode.appendChild(err);
+                }
+
+                if (error.errors.lastname !== undefined) {
+                    var err1 = document.createElement('div');
+                    err1.innerHTML = error.errors.lastname;
+                    err1.className = 'lastname-error';
+                    lastname.parentNode.appendChild(err1);
+                }
+            } else if (req.status === 204) {
+                alert('User is not existed ! ! !');
+            } else {
+                console.log('        [ERROR]:  ' + req.responseText);
+            }
+        }
+    };
+
+    req.send(JSON.stringify(param));
+}
+
+function removeValidError(tr) {
+    var passwordError = tr.getElementsByClassName('password-error');
+    var lastnameError = tr.getElementsByClassName('lastname-error');
+    for (var i = 0; i < passwordError.length; i++) passwordError[i].parentNode.removeChild(passwordError[i]);
+    for (var o = 0; i < lastnameError.length; o++)  lastnameError[o].parentNode.removeChild(lastnameError[o]);
+}
+
 // function deleteUser(e) {
 //     var username = e.getAttribute('username');
 //     var req = new XMLHttpRequest();
@@ -141,17 +168,4 @@ function renderRegistrationRows(registrations, resultTable) {
 //     };
 //
 //     req.send();
-// }
-//
-// function removeValidError(tr) {
-//     var passwordError = tr.getElementsByClassName('password-error');
-//     var lastNameError = tr.getElementsByClassName('lastName-error');
-//
-//     for (var i = 0; i < passwordError.length; i++) {
-//         passwordError[i].parentNode.removeChild(passwordError[i]);
-//     }
-//
-//     for (var i = 0; i < lastNameError.length; i++) {
-//         lastNameError[i].parentNode.removeChild(lastNameError[i]);
-//     }
 // }
