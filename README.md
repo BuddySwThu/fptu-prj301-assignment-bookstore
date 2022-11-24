@@ -1,7 +1,7 @@
 [![CI with GitHub Actions using Maven and Spring MVC | © Budictreas](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/actions/workflows/maven-ci.yml)
 
 # Welcome to Book-Store Repository
-This repository is the code for Spring 5 series on [http://www.kieutrongkhanh.net/search/label/Spring5](kieutrongkhanh.net) rewritten by me. </br></br>
+This repository is related to Spring 5 series on [kieutrongkhanh.net](http://www.kieutrongkhanh.net/search/label/Spring5)</br></br>
 
 ## This series is a A-Z tutorial for CRUD with Spring MVC. Consists of:
     * How to config Spring MVC using xml method.
