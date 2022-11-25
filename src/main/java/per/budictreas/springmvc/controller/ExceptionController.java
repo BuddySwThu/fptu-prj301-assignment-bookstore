@@ -34,8 +34,14 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, headers, status);
     }
 
-    //    [LƯU Ý]: vì ResponseEntityExceptionHandler chỉ là một class do Spring cung cấp
-    //    Chúng ta có thể extends hoặc không tùy ý. Nếu không extends code sẽ thay đổi như sau đây
+    @ExceptionHandler(value = {EntityNotFoundException.class})
+    public ResponseEntity<CommonResponseModel> handleEntityNotFound() {
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+}
+
+//    [LƯU Ý]: vì ResponseEntityExceptionHandler chỉ là một class do Spring cung cấp
+//    Chúng ta có thể extends hoặc không tùy ý. Nếu không extends code sẽ thay đổi như sau đây
 //    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
 //    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
 //        HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -51,9 +57,3 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 //
 //        return new ResponseEntity<>(body, status);
 //    }
-
-    @ExceptionHandler(value = {EntityNotFoundException.class})
-    public ResponseEntity<CommonResponseModel> handleEntityNotFound(RuntimeException ex, WebRequest request) {
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-}

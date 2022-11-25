@@ -1,14 +1,11 @@
 function search(button) {
-    var txtSearch = document.getElementsByName('searchValue')[0];
-    var resultTable = document.getElementById('result');
-    var searchValue = txtSearch.value;
+    let searchValue = document.getElementsByName('searchValue')[0].value;
     if (searchValue !== ' ') {
-        var req = new XMLHttpRequest();                                           // + "&timestamp=" + new Date().getTime(), 
+        let req = new XMLHttpRequest();
         req.open('GET', './user/search-user?searchValue=' + searchValue, true);
         req.onreadystatechange = function () {
             if (req.readyState === 4 && req.status === 200) {
-                var userAccounts = JSON.parse(req.responseText);
-                renderRegistrationRows(userAccounts, resultTable);
+                renderRegistrationRows(JSON.parse(req.responseText), document.getElementById('result'));
             }
         };
         req.send();
@@ -16,13 +13,13 @@ function search(button) {
 }
 
 function renderHeaderRegistrationRows(table) {
-    var tr = document.createElement('tr');
-    var thNo = document.createElement('th');
-    var thUsername = document.createElement('th');
-    var thPassword = document.createElement('th');
-    var thLastName = document.createElement('th');
-    var thAdmin = document.createElement('th');
-    var thUpdate = document.createElement('th');
+    let tr = document.createElement('tr');
+    let thNo = document.createElement('th');
+    let thUsername = document.createElement('th');
+    let thPassword = document.createElement('th');
+    let thLastName = document.createElement('th');
+    let thAdmin = document.createElement('th');
+    let thUpdate = document.createElement('th');
 
     thNo.innerHTML = 'No.';
     thUsername.innerHTML = 'Username';
@@ -42,19 +39,19 @@ function renderHeaderRegistrationRows(table) {
 
 function renderRegistrationRows(registrations, resultTable) {
     resultTable.innerHTML = '';
-    var table = document.createElement('table');
-    table.setAttribute('border', 2);
+    let table = document.createElement('table');
+    table.setAttribute('border', '3');
     if (registrations != null && registrations.length !== 0) {
         renderHeaderRegistrationRows(table);
-        for (var i = 0; i < registrations.length; i++) {
-            var registration = registrations[i];
-            var tr = document.createElement('tr');
-            var tdNo = document.createElement('td');
-            var tdUsername = document.createElement('td');
-            var tdPassword = document.createElement('td');
-            var tdLastname = document.createElement('td');
-            var tdAdmin = document.createElement('td');
-            var tdUpdate = document.createElement('td');
+        for (let i = 0; i < registrations.length; i++) {
+            let registration = registrations[i];
+            let tr = document.createElement('tr');
+            let tdNo = document.createElement('td');
+            let tdUsername = document.createElement('td');
+            let tdPassword = document.createElement('td');
+            let tdLastname = document.createElement('td');
+            let tdAdmin = document.createElement('td');
+            let tdUpdate = document.createElement('td');
 
             tdNo.innerHTML = i + 1;
             tdUsername.innerHTML = '<a class="lbl-username">' + registration.username + '</a>';
@@ -62,7 +59,7 @@ function renderRegistrationRows(registrations, resultTable) {
             tdLastname.innerHTML = '<input type="text" class="txt-lastname" value="' + registration.lastname + '" />';
             tdAdmin.innerHTML = '<input type="checkbox" class="chk-role" ' + (registration.role ? 'checked' : '') + ' />';
 
-            var btnUpdate = document.createElement('button');
+            let btnUpdate = document.createElement('button');
             tdUpdate.appendChild(btnUpdate);
             btnUpdate.innerHTML = 'Update';
             btnUpdate.onclick = function (e) {
@@ -79,7 +76,7 @@ function renderRegistrationRows(registrations, resultTable) {
         }
         resultTable.appendChild(table);
     } else {
-        var noRecordText = document.createElement('h2');
+        let noRecordText = document.createElement('h2');
         noRecordText.innerHTML = 'No record(s) matched ! ! !';
         resultTable.appendChild(noRecordText);
     }
@@ -147,7 +144,7 @@ function removeValidError(tr) {
     var passwordError = tr.getElementsByClassName('password-error');
     var lastnameError = tr.getElementsByClassName('lastname-error');
     for (var i = 0; i < passwordError.length; i++) passwordError[i].parentNode.removeChild(passwordError[i]);
-    for (var o = 0; i < lastnameError.length; o++)  lastnameError[o].parentNode.removeChild(lastnameError[o]);
+    for (var o = 0; i < lastnameError.length; o++) lastnameError[o].parentNode.removeChild(lastnameError[o]);
 }
 
 // function deleteUser(e) {
