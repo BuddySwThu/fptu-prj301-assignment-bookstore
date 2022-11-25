@@ -7,33 +7,33 @@ import per.budictreas.springmvc.data.requestmodel.UpdateUserRequestModel;
 import per.budictreas.springmvc.data.responsemodel.CommonResponseModel;
 import per.budictreas.springmvc.mapper.modelmapper.RegistrationResponseModelMapper;
 import per.budictreas.springmvc.data.responsemodel.RegistrationResponseModel;
-import per.budictreas.springmvc.mapper.modelmapper.UpdateUserModelMapper;
-import per.budictreas.springmvc.service.RegistrationService;
+import per.budictreas.springmvc.mapper.modelmapper.UpdateUserRequestModelMapper;
+import per.budictreas.springmvc.service.BookStoreService;
 
 import java.util.List;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = "/user")
 public class RestController {
-    private final RegistrationService registrationService;
+    private final BookStoreService bookStoreService;
     private final RegistrationResponseModelMapper registrationResponseModelMapper;
-    private final UpdateUserModelMapper updateUserModelMapper;
+    private final UpdateUserRequestModelMapper updateUserRequestModelMapper;
 
-    public RestController(RegistrationService registrationService,
+    public RestController(BookStoreService bookStoreService,
                           RegistrationResponseModelMapper registrationResponseModelMapper,
-                          UpdateUserModelMapper updateUserModelMapper) {
-        this.registrationService = registrationService;
+                          UpdateUserRequestModelMapper updateUserRequestModelMapper) {
+        this.bookStoreService = bookStoreService;
         this.registrationResponseModelMapper = registrationResponseModelMapper;
-        this.updateUserModelMapper = updateUserModelMapper;
+        this.updateUserRequestModelMapper = updateUserRequestModelMapper;
     }
 
     @GetMapping(value = "/search-user")
     public ResponseEntity<List<RegistrationResponseModel>> search(@RequestParam("searchValue") String searchValue) {
-        return ResponseEntity.ok(this.registrationResponseModelMapper.toResponseModel(this.registrationService.searchByLastname(searchValue)));
+        return ResponseEntity.ok(this.registrationResponseModelMapper.toREO(this.bookStoreService.searchByLastname(searchValue)));
     }
 
     @PutMapping(value = "/update-user")             //@Valid for hibernate-validator version 5.?.?
     public ResponseEntity<CommonResponseModel> update(@Validated @RequestBody UpdateUserRequestModel request) {
-        return ResponseEntity.ok(CommonResponseModel.build(this.registrationService.updateUser(this.updateUserModelMapper.toDTO(request)), "Update successfully", null));
+        return ResponseEntity.ok(CommonResponseModel.build(this.bookStoreService.updateUser(this.updateUserRequestModelMapper.toDTO(request)), "Update successfully", null));
     }
 }

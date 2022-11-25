@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import per.budictreas.springmvc.common.Constant;
 import per.budictreas.springmvc.data.entity.RegistrationEntity;
-import per.budictreas.springmvc.service.RegistrationService;
+import per.budictreas.springmvc.service.BookStoreService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,10 +16,10 @@ public class MainController {
     private final static String INVALID_PAGE = "invalid";
     private final static String SEARCH_PAGE = "search";
     private final static String LOGIN_PAGE = "login";
-    private final RegistrationService registrationService;
+    private final BookStoreService bookStoreService;
 
-    public MainController(RegistrationService registrationService) {
-        this.registrationService = registrationService;
+    public MainController(BookStoreService bookStoreService) {
+        this.bookStoreService = bookStoreService;
     }
 
     @RequestMapping(value = {"/", "login"}, method = RequestMethod.GET)
@@ -30,7 +30,7 @@ public class MainController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request) {
         String url = INVALID_PAGE;
-        RegistrationEntity registrationEntity = this.registrationService.checkLogin(request.getParameter("username"), request.getParameter("password"));
+        RegistrationEntity registrationEntity = this.bookStoreService.checkLogin(request.getParameter("username"), request.getParameter("password"));
         if (registrationEntity != null) {
             url = SEARCH_PAGE;
             request.getSession().setAttribute(Constant.ATTR_USER, registrationEntity);
