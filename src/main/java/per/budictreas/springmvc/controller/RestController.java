@@ -36,4 +36,11 @@ public class RestController {
     public ResponseEntity<CommonResponseModel> update(@Validated @RequestBody UpdateUserRequestModel request) {
         return ResponseEntity.ok(CommonResponseModel.build(this.bookStoreService.updateUser(this.updateUserRequestModelMapper.toDTO(request)), "Update successfully", null));
     }
+
+    @DeleteMapping(value = "/delete-user")
+    public ResponseEntity<CommonResponseModel> delete(@RequestParam("username") String username) {
+        boolean result = this.bookStoreService.deleteUseṛ(username);
+        String message = result ? "Delete successfully." : "Delete fail !";
+        return ResponseEntity.ok(CommonResponseModel.build(result, message, null));
+    }
 }

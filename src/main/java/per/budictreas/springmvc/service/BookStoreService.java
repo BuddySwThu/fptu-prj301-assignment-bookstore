@@ -36,4 +36,8 @@ public class BookStoreService {
 
         return true;
     }
+
+    public boolean deleteUseṛ(String username) {
+        return this.bookStoreRepository.deleteByUsername(username) == 1;
+    }
 }

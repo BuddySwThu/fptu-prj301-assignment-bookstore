@@ -20,6 +20,7 @@ function renderHeaderRegistrationRows(table) {
     let thLastName = document.createElement('th');
     let thAdmin = document.createElement('th');
     let thUpdate = document.createElement('th');
+    let thDelete = document.createElement('th');
 
     thNo.innerHTML = 'No.';
     thUsername.innerHTML = 'Username';
@@ -27,6 +28,7 @@ function renderHeaderRegistrationRows(table) {
     thLastName.innerHTML = 'Last Name';
     thAdmin.innerHTML = 'Role';
     thUpdate.innerHTML = 'Update';
+    thDelete.innerHTML = 'Delete';
 
     tr.appendChild(thNo);
     tr.appendChild(thUsername);
@@ -34,6 +36,7 @@ function renderHeaderRegistrationRows(table) {
     tr.appendChild(thLastName);
     tr.appendChild(thAdmin);
     tr.appendChild(thUpdate);
+    tr.appendChild(thDelete);
     table.appendChild(tr);
 }
 
@@ -52,6 +55,7 @@ function renderRegistrationRows(registrations, resultTable) {
             let tdLastname = document.createElement('td');
             let tdAdmin = document.createElement('td');
             let tdUpdate = document.createElement('td');
+            let tdDelete = document.createElement('td');
 
             tdNo.innerHTML = i + 1;
             tdUsername.innerHTML = '<a class="lbl-username">' + registration.username + '</a>';
@@ -66,12 +70,22 @@ function renderRegistrationRows(registrations, resultTable) {
                 updateUser(e.target);
             };
 
+            let deleteLink = document.createElement('a');
+            tdDelete.appendChild(deleteLink);
+            deleteLink.setAttribute('href', '#');
+            deleteLink.setAttribute('username', registration.username);
+            deleteLink.innerHTML = 'X';
+            deleteLink.onclick = function (e) {
+                deleteUser(e.target);
+            };
+
             tr.appendChild(tdNo);
             tr.appendChild(tdUsername);
             tr.appendChild(tdPassword);
             tr.appendChild(tdLastname);
             tr.appendChild(tdAdmin);
             tr.appendChild(tdUpdate);
+            tr.appendChild(tdDelete);
             table.appendChild(tr);
         }
         resultTable.appendChild(table);
@@ -81,7 +95,6 @@ function renderRegistrationRows(registrations, resultTable) {
         resultTable.appendChild(noRecordText);
     }
 }
-
 
 function updateUser(e) {
     var tr = e.parentNode.parentNode;
@@ -147,22 +160,22 @@ function removeValidError(tr) {
     for (var o = 0; i < lastnameError.length; o++) lastnameError[o].parentNode.removeChild(lastnameError[o]);
 }
 
-// function deleteUser(e) {
-//     var username = e.getAttribute('username');
-//     var req = new XMLHttpRequest();
-//     req.open('DELETE', './user/delete-user?username=' + username, true);
-//
-//     req.onreadystatechange = function () {
-//         if (req.readyState === XMLHttpRequest.DONE) {
-//             if (req.status === 200) {
-//                 var response = JSON.parse(req.responseText);
-//                 alert(response.message);
-//                 search();
-//             } else {
-//                 console.log('   [ERROR]:   ' + req.responseText);
-//             }
-//         }
-//     };
-//
-//     req.send();
-// }
+function deleteUser(e) {
+    var username = e.getAttribute('username');
+    var req = new XMLHttpRequest();
+    req.open('DELETE', './user/delete-user?username=' + username, true);
+
+    req.onreadystatechange = function () {
+        if (req.readyState === XMLHttpRequest.DONE) {
+            if (req.status === 200) {
+                var response = JSON.parse(req.responseText);
+                alert(response.message);
+                search();
+            } else {
+                console.log('   [ERROR]:   ' + req.responseText);
+            }
+        }
+    };
+
+    req.send();
+}
