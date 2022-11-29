@@ -15,6 +15,7 @@ This repository is related to Spring 5 series on [kieutrongkhanh.net](http://www
 ![Search Page of Book Store Webapp](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-11-24%20at%2014-46-38%20Search%20Page.png)
 ![Update User Invalid](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-11-25%20at%2001-39-33%20Search%20Page.png)
 ![Update User Success](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-11-25%20014101.png)
+![Delete User Success](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-11-30%20011254.png)
 
 ### Connect me via baontse150486@fpt.edu.vn
 #### Copyright &#169; 2022 budictreas/BuddySwThu
