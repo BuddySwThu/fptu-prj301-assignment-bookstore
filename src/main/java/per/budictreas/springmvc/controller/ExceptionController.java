@@ -4,6 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +29,9 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
         for (FieldError x : fieldErrors) errors.put(x.getField(), x.getDefaultMessage());
+
+        List<ObjectError> objectErrors = ex.getBindingResult().getGlobalErrors();
+        for (ObjectError x : objectErrors) errors.put(x.getCode(), x.getDefaultMessage());
 
         body.put("errors", errors);
 

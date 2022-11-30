@@ -6,7 +6,7 @@ import per.budictreas.springmvc.data.entity.RegistrationEntity;
 
 import java.util.List;
 
-public interface BookStoreRepository extends JpaRepository<RegistrationEntity, String> {
+public interface UserAccountRepository extends JpaRepository<RegistrationEntity, String> {
     long countByUsernameAndPassword(String username, String password);
 
     RegistrationEntity findByUsername(String username);

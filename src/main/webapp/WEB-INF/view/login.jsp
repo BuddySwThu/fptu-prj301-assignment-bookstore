@@ -26,7 +26,7 @@
             </tbody>
         </table>
     </form>
-    <%--    <a href="register_taglib">Click here to create new account.</a><br/>--%>
+    <a href="register">Click here to create new account.</a><br/>
     <%--    <a href="shop">Click here to buy book.</a>--%>
 </body>
 </html>
