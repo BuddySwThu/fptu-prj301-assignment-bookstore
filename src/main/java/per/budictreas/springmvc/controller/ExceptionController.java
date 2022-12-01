@@ -1,5 +1,6 @@
 package per.budictreas.springmvc.controller;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,5 +42,10 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {EntityNotFoundException.class})
     public ResponseEntity<CommonResponseModel> handleEntityNotFound() {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest webRequest) {
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

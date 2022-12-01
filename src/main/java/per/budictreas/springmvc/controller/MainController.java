@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import per.budictreas.springmvc.common.Constant;
 import per.budictreas.springmvc.data.entity.RegistrationEntity;
@@ -86,5 +83,15 @@ public class MainController {
     @InitBinder("user")
     private void initBinder(WebDataBinder binder) {
         binder.addValidators(registerValidator);
+    }
+
+    @GetMapping("/shop")
+    public ModelAndView getShopPage() {
+        return new ModelAndView("shop");
+    }
+
+    @GetMapping("/showCart")
+    public ModelAndView getCartPage() {
+        return new ModelAndView("cart");
     }
 }

@@ -41,6 +41,6 @@
             </tbody>
         </table>
     </form:form>
-    <a href="login">Go back to login page.</a>
+    <a href="login" style="color: coral">Go back to login page.</a>
 </body>
 </html>

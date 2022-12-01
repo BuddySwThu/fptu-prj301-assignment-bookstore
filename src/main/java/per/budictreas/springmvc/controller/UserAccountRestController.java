@@ -20,7 +20,7 @@ import java.util.List;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = "/user")
-public class RestController {
+public class UserAccountRestController {
     private final UserAccountService userAccountService;
     private final RegistrationResponseModelMapper registrationResponseModelMapper;
     private final UpdateUserRequestModelMapper updateUserRequestModelMapper;
@@ -28,11 +28,11 @@ public class RestController {
     private final Validator validator;
 
     @Autowired
-    public RestController(UserAccountService userAccountService,
-                          RegistrationResponseModelMapper registrationResponseModelMapper,
-                          UpdateUserRequestModelMapper updateUserRequestModelMapper,
-                          RegisterFormRequestModelMapper registerFormRequestModelMapper,
-                          @Qualifier("registerValidator") Validator validator) {
+    public UserAccountRestController(UserAccountService userAccountService,
+                                     RegistrationResponseModelMapper registrationResponseModelMapper,
+                                     UpdateUserRequestModelMapper updateUserRequestModelMapper,
+                                     RegisterFormRequestModelMapper registerFormRequestModelMapper,
+                                     @Qualifier("registerValidator") Validator validator) {
         this.userAccountService = userAccountService;
         this.registrationResponseModelMapper = registrationResponseModelMapper;
         this.updateUserRequestModelMapper = updateUserRequestModelMapper;
