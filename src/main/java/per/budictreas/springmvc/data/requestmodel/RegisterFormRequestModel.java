@@ -16,8 +16,11 @@ import java.io.Serializable;
 @ConfirmPasswordNotMatch
 public class RegisterFormRequestModel implements Serializable {
     @UsernameExisted
+    //@Length(min = 6, max = 20)
     private String username;
+    //@Length(min = 8, max = 30)
     private String password;
     private String confirmPassword;
+    //@Length(min = 2, max = 50)
     private String lastname;
 }

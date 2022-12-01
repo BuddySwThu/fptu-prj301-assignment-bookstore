@@ -33,15 +33,15 @@ public class RegisterValidator implements Validator {
         int lastnameLength = registerFormRequestModel.getLastname().length();
 
         if (usernameLength < 6 || usernameLength > 20) {
-            errors.rejectValue("username", "username.length", "username must be in 6 to 20 characters !");
+            errors.rejectValue("username", "username-length", "username must be in 6 to 20 characters !");
         }
 
         if (passwordLength < 8 || passwordLength > 30) {
-            errors.rejectValue("password", "password.length", "password must be in 8 to 30 characters !");
+            errors.rejectValue("password", "password-length", "password must be in 8 to 30 characters !");
         }
 
         if (lastnameLength < 2 || lastnameLength > 50) {
-            errors.rejectValue("lastname", "lastname.length", "lastname must be in 2 to 50 characters !");
+            errors.rejectValue("lastname", "lastname-length", "lastname must be in 2 to 50 characters !");
         }
     }
 }
