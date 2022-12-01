@@ -1,5 +1,6 @@
 package per.budictreas.springmvc.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Validator;
@@ -26,6 +27,7 @@ public class RestController {
     private final RegisterFormRequestModelMapper registerFormRequestModelMapper;
     private final Validator validator;
 
+    @Autowired
     public RestController(UserAccountService userAccountService,
                           RegistrationResponseModelMapper registrationResponseModelMapper,
                           UpdateUserRequestModelMapper updateUserRequestModelMapper,
@@ -55,10 +57,10 @@ public class RestController {
         return ResponseEntity.ok(CommonResponseModel.build(result, message, null));
     }
 
-//    @InitBinder("registerFormRequestModel")
-//    private void initBinder(WebDataBinder binder) {
-//        binder.addValidators(validator);
-//    }
+    @InitBinder("registerFormRequestModel")
+    private void initBinder(WebDataBinder binder) {
+        binder.addValidators(validator);
+    }
 
     @RequestMapping(value = "/create-user", method = RequestMethod.POST)
     public ResponseEntity<CommonResponseModel> register(@Validated @RequestBody RegisterFormRequestModel registerFormRequestModel) {

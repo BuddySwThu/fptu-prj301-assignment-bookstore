@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConfirmPasswordNotMatch {
-    String message() default "Confirm password mismatch !";
+    String message() default "confirm password mismatched !";
 
     Class<?>[] groups() default {};
 

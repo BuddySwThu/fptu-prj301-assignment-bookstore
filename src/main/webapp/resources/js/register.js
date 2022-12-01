@@ -46,12 +46,12 @@ function displayRegisterError(error) {
         usernameRow.parentNode.appendChild(err);
     }
 
-    // if (error.errors.UsernameExisted !== undefined) {
-    //     let err = document.createElement('div');
-    //     err.innerHTML = error.errors.UsernameExisted;
-    //     err.className = 'error';
-    //     usernameRow.parentNode.appendChild(err);
-    // }
+    if (error.errors.UsernameExisted !== undefined) {
+        let err = document.createElement('div');
+        err.innerHTML = error.errors.UsernameExisted;
+        err.className = 'error';
+        usernameRow.parentNode.appendChild(err);
+    }
 
     if (error.errors.password !== undefined) {
         let err = document.createElement('div');
@@ -59,13 +59,6 @@ function displayRegisterError(error) {
         err.className = 'error';
         passwordRow.parentNode.appendChild(err);
     }
-
-    // if (error.errors.confirmPassword !== undefined) {
-    //     let err = document.createElement('div');
-    //     err.innerHTML = error.errors.confirmPassword;
-    //     err.className = 'error';
-    //     confirmPasswordRow.parentNode.appendChild(err);
-    // }
 
     if (error.errors.ConfirmPasswordNotMatch !== undefined) {
         let err = document.createElement('div');

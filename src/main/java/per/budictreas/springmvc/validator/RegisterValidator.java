@@ -34,14 +34,10 @@ public class RegisterValidator implements Validator {
 
         if (usernameLength < 6 || usernameLength > 20) {
             errors.rejectValue("username", "username.length", "username must be in 6 to 20 characters !");
-        } else if (userAccountService.isUsernameExisted(username)) {
-            errors.rejectValue("username", "username.existed", "username has been existed !");
         }
 
         if (passwordLength < 8 || passwordLength > 30) {
             errors.rejectValue("password", "password.length", "password must be in 8 to 30 characters !");
-        } else if (!password.equals(registerFormRequestModel.getConfirmPassword())) {
-            errors.rejectValue("confirmPassword", "confirm.notmatch", "confirm password not matched !");
         }
 
         if (lastnameLength < 2 || lastnameLength > 50) {

@@ -1,6 +1,5 @@
 package per.budictreas.springmvc.common.validator;
 
-import per.budictreas.springmvc.validator.ConfirmPasswordValidator;
 import per.budictreas.springmvc.validator.UsernameExistedValidator;
 
 import javax.validation.Constraint;
@@ -12,7 +11,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UsernameExisted {
-    String message() default "Username is existed !";
+    String message() default "username has been existed !";
 
     Class<?>[] groups() default {};
 

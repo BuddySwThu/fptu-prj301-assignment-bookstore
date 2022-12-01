@@ -13,28 +13,25 @@
         <table>
             <tr>
                 <td>Username</td>
-                <td id="usernameRow"><input type="text" id="txtUsername"/></td>
+                <td id="usernameRow"><label for="txtUsername"><input type="text" id="txtUsername"/></label></td>
             </tr>
-
             <tr>
                 <td>Password</td>
-                <td id="passwordRow"><input type="password" id="txtPassword"/></td>
+                <td id="passwordRow"><label for="txtPassword"><input type="password" id="txtPassword"/></label></td>
             </tr>
-
             <tr>
                 <td>Confirm Password</td>
-                <td id="confirmPasswordRow"><input type="password" id="txtConfirmPassword"/></td>
+                <td id="confirmPasswordRow"><label for="txtConfirmPassword"><input type="password"
+                                                                                   id="txtConfirmPassword"/></label>
+                </td>
             </tr>
-
             <tr>
                 <td>Last name</td>
-                <td id="lastNameRow"><input type="text" id="txtLastName"/></td>
+                <td id="lastNameRow"><label for="txtLastName"><input type="text" id="txtLastName"/></label></td>
             </tr>
-
             <tr>
                 <td colspan="2">
-                    <br/>
-                    <button type="submit" onclick="register(function(p1,p2){return undefined;})">Register</button>
+                    <button type="submit" onclick="register()">Register</button>
                     <input type="reset" value="Reset">
                 </td>
             </tr>
