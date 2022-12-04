@@ -7,7 +7,7 @@
     <script src="./resources/js/cart.js"></script>
 </head>
 <body onload="getCart()">
-    <div><h1>Your Cart Nè</h1></div>
+    <div><h1>Your Cart</h1></div>
     <div id="mainFrame"></div>
     <a href="shop" style="color: darksalmon">Click here to continue shopping.</a>
 </body>

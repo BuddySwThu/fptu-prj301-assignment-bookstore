@@ -65,9 +65,7 @@ public class CartService {
     private void addProduct(ProductDTO productDTO) {
         if (this.products == null) this.products = new HashMap<>(); //end if products not null
         int quantity = 1;
-        if (this.products.containsKey(productDTO)) {
-            quantity = this.products.get(productDTO) + 1;
-        }
+        if (this.products.containsKey(productDTO)) quantity = this.products.get(productDTO) + 1;
         this.products.put(productDTO, quantity);
     }
 

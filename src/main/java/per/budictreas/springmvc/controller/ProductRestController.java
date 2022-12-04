@@ -34,5 +34,4 @@ public class ProductRestController {
     public ResponseEntity<List<ProductResponseModel>> getAllProducts() {
         return ResponseEntity.ok(this.productResponseModelMapper.toREO(this.productService.getAllProducts()));
     }
-
 }

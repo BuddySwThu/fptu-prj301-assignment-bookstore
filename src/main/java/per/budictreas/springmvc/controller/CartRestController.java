@@ -29,9 +29,6 @@ public class CartRestController {
 
     //Trong giá trị của mapping URL, chúng ta dùng “{productID}” và trong parameter của hàm chúng ta dùng annotation @PathVarible.
     //Spring sẽ tự động binding bất kỳ giá trị nào nằm ở {productID} sẽ được convert sang Interger productID.
-    //o   Truy cập ở /products/1  =>  Integer productID = 1
-    //o   Truy cập ở /products/23  =>  Interger productID = 23
-    //o   Truy cập ở /products/abc  =>  quăng lỗi [TypeMismatchException]
     @PostMapping(value = "/products/add-product-to-cart/{productID}")
     public ResponseEntity<CommonResponseModel> addProductToCart(@PathVariable Integer productID) {
         this.cartService.addProductByID(productID);
