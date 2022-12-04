@@ -18,6 +18,11 @@ This repository is related to Spring 5 series on [kieutrongkhanh.net](http://www
 ![Delete User Success](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-11-30%20011254.png)
 ![Create User Failed](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-11-30%20at%2022-41-13%20Register%20Page.png)
 ![Create User Failed @SpringTablib](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-01%20at%2014-46-45%20Register%20Using%20Spring%20Taglib.png)
+![Show book in Book Store](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20at%2001-17-22%20Book%20Store.png)
+![Add book to cart successfully](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20011814.png)
+![Show book in cart of Book Store](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20at%2001-18-34%20Your%20Cart.png)
+![Remove book from cart successfully](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20011857.png)
+![Empty cart of Book Store](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20at%2001-19-09%20Your%20Cart.png)
 
 ### Connect me via baontse150486@fpt.edu.vn
 #### Copyright &#169; 2022 budictreas/BuddySwThu
