@@ -23,6 +23,10 @@ This repository is related to Spring 5 series on [kieutrongkhanh.net](http://www
 ![Show book in cart of Book Store](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20at%2001-18-34%20Your%20Cart.png)
 ![Remove book from cart successfully](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20011857.png)
 ![Empty cart of Book Store](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20at%2001-19-09%20Your%20Cart.png)
+![Config more Database for project](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Capture.PNG)
+![Using MapStruct to map Objects with different field names](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20at%2016-09-29%20Search%20Page.png)
+![Redirect page](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Screenshot%202022-12-05%20at%2016-10-28%20B%C3%A0i%208%20C%C3%A1c%20k%E1%BB%B9%20thu%E1%BA%ADt%20h%E1%BB%97%20tr%E1%BB%A3%20ch%C6%B0%C6%A1ng%20tr%C3%ACnh%20trong%20Spring%205.png)
+![Security for Page](https://github.com/BuddySwThu/fptu-prj301-assignment-bookstore/blob/main/img/Capture1.PNG)
 
 ### Connect me via baontse150486@fpt.edu.vn
 #### Copyright &#169; 2022 budictreas/BuddySwThu
