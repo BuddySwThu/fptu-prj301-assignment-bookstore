@@ -7,7 +7,7 @@ import per.budictreas.springmvc.data.dto.ProductDTO;
 import per.budictreas.springmvc.data.responsemodel.CartProductResponseModel;
 import per.budictreas.springmvc.mapper.dtomapper.ProductDTOMapper;
 import per.budictreas.springmvc.mapper.modelmapper.CartProductResponseModelMapper;
-import per.budictreas.springmvc.repository.ProductRepository;
+import per.budictreas.springmvc.repository.MS.ProductRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;

@@ -1,10 +1,11 @@
 package per.budictreas.springmvc.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import per.budictreas.springmvc.data.dto.RegistrationDTO;
 import per.budictreas.springmvc.data.entity.RegistrationEntity;
 import per.budictreas.springmvc.mapper.dtomapper.RegistrationDTOMapper;
-import per.budictreas.springmvc.repository.UserAccountRepository;
+import per.budictreas.springmvc.repository.MS.UserAccountRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -14,6 +15,7 @@ public class UserAccountService {
     private final UserAccountRepository userAccountRepository;
     private final RegistrationDTOMapper registrationDTOMapper;
 
+    @Autowired
     public UserAccountService(UserAccountRepository userAccountRepository, RegistrationDTOMapper registrationDTOMapper) {
         this.userAccountRepository = userAccountRepository;
         this.registrationDTOMapper = registrationDTOMapper;

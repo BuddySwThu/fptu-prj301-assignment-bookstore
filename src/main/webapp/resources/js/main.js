@@ -16,7 +16,7 @@ function renderHeaderRegistrationRows(table) {
     let tr = document.createElement('tr');
     let thNo = document.createElement('th');
     let thUsername = document.createElement('th');
-    let thPassword = document.createElement('th');
+    //let thPassword = document.createElement('th');
     let thLastName = document.createElement('th');
     let thAdmin = document.createElement('th');
     let thUpdate = document.createElement('th');
@@ -24,7 +24,7 @@ function renderHeaderRegistrationRows(table) {
 
     thNo.innerHTML = 'No.';
     thUsername.innerHTML = 'Username';
-    thPassword.innerHTML = 'Password';
+    //thPassword.innerHTML = 'Password';
     thLastName.innerHTML = 'Last Name';
     thAdmin.innerHTML = 'Role';
     thUpdate.innerHTML = 'Update';
@@ -32,7 +32,7 @@ function renderHeaderRegistrationRows(table) {
 
     tr.appendChild(thNo);
     tr.appendChild(thUsername);
-    tr.appendChild(thPassword);
+    //tr.appendChild(thPassword);
     tr.appendChild(thLastName);
     tr.appendChild(thAdmin);
     tr.appendChild(thUpdate);
@@ -51,7 +51,7 @@ function renderRegistrationRows(registrations, resultTable) {
             let tr = document.createElement('tr');
             let tdNo = document.createElement('td');
             let tdUsername = document.createElement('td');
-            let tdPassword = document.createElement('td');
+            //let tdPassword = document.createElement('td');
             let tdLastname = document.createElement('td');
             let tdAdmin = document.createElement('td');
             let tdUpdate = document.createElement('td');
@@ -59,9 +59,12 @@ function renderRegistrationRows(registrations, resultTable) {
 
             tdNo.innerHTML = i + 1;
             tdUsername.innerHTML = '<a class="lbl-username">' + registration.username + '</a>';
-            tdPassword.innerHTML = '<input type="text" class="txt-password" value="' + registration.password + '" />';
+            //tdPassword.innerHTML = '<input type="text" class="txt-password" value="' + registration.password + '" />';
             tdLastname.innerHTML = '<input type="text" class="txt-lastname" value="' + registration.lastname + '" />';
-            tdAdmin.innerHTML = '<input type="checkbox" class="chk-role" ' + (registration.role ? 'checked' : '') + ' />';
+            //tdAdmin.innerHTML = '<input type="checkbox" class="chk-role" ' + (registration.admin ? 'checked' : '')
+            // + ' />';
+            if(registration.admin) tdAdmin.innerHTML = '<a class="lbl-role">Admin</a>';
+            else tdAdmin.innerHTML = '<a class="lbl-role">Member</a>';
 
             let btnUpdate = document.createElement('button');
             tdUpdate.appendChild(btnUpdate);
@@ -81,7 +84,7 @@ function renderRegistrationRows(registrations, resultTable) {
 
             tr.appendChild(tdNo);
             tr.appendChild(tdUsername);
-            tr.appendChild(tdPassword);
+            //tr.appendChild(tdPassword);
             tr.appendChild(tdLastname);
             tr.appendChild(tdAdmin);
             tr.appendChild(tdUpdate);

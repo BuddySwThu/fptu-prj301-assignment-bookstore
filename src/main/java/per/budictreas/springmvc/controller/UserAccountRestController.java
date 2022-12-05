@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import per.budictreas.springmvc.data.requestmodel.RegisterFormRequestModel;
 import per.budictreas.springmvc.data.requestmodel.UpdateUserRequestModel;
 import per.budictreas.springmvc.data.responsemodel.CommonResponseModel;
+import per.budictreas.springmvc.data.responsemodel.CustomRegistrationResponeModel;
+import per.budictreas.springmvc.mapper.modelmapper.CustomRegistrationResponseModelMapper;
 import per.budictreas.springmvc.mapper.modelmapper.RegisterFormRequestModelMapper;
-import per.budictreas.springmvc.mapper.modelmapper.RegistrationResponseModelMapper;
-import per.budictreas.springmvc.data.responsemodel.RegistrationResponseModel;
 import per.budictreas.springmvc.mapper.modelmapper.UpdateUserRequestModelMapper;
 import per.budictreas.springmvc.service.UserAccountService;
 
@@ -22,27 +22,32 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserAccountRestController {
     private final UserAccountService userAccountService;
-    private final RegistrationResponseModelMapper registrationResponseModelMapper;
+    //private final RegistrationResponseModelMapper registrationResponseModelMapper;
     private final UpdateUserRequestModelMapper updateUserRequestModelMapper;
     private final RegisterFormRequestModelMapper registerFormRequestModelMapper;
     private final Validator validator;
+    private final CustomRegistrationResponseModelMapper customRegistrationResponseModelMapper;
 
     @Autowired
     public UserAccountRestController(UserAccountService userAccountService,
-                                     RegistrationResponseModelMapper registrationResponseModelMapper,
+                                     //RegistrationResponseModelMapper registrationResponseModelMapper,
                                      UpdateUserRequestModelMapper updateUserRequestModelMapper,
                                      RegisterFormRequestModelMapper registerFormRequestModelMapper,
-                                     @Qualifier("registerValidator") Validator validator) {
+                                     @Qualifier("registerValidator") Validator validator,
+                                     CustomRegistrationResponseModelMapper customRegistrationResponseModelMapper) {
         this.userAccountService = userAccountService;
-        this.registrationResponseModelMapper = registrationResponseModelMapper;
+        //this.registrationResponseModelMapper = registrationResponseModelMapper;
         this.updateUserRequestModelMapper = updateUserRequestModelMapper;
         this.registerFormRequestModelMapper = registerFormRequestModelMapper;
         this.validator = validator;
+        this.customRegistrationResponseModelMapper = customRegistrationResponseModelMapper;
     }
 
     @GetMapping(value = "/search-user")
-    public ResponseEntity<List<RegistrationResponseModel>> search(@RequestParam("searchValue") String searchValue) {
-        return ResponseEntity.ok(this.registrationResponseModelMapper.toREO(this.userAccountService.searchByLastname(searchValue)));
+    public ResponseEntity<List<CustomRegistrationResponeModel>> search(@RequestParam("searchValue") String searchValue) {
+        //return ResponseEntity.ok(this.registrationResponseModelMapper.toREO(this.userAccountService
+        // .searchByLastname(searchValue)));
+        return ResponseEntity.ok(this.customRegistrationResponseModelMapper.toREO(this.userAccountService.searchByLastname(searchValue)));
     }
 
     @PutMapping(value = "/update-user")             //@Valid for hibernate-validator version 5.?.?

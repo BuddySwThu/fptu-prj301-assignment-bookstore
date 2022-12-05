@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import per.budictreas.springmvc.data.dto.ProductDTO;
 import per.budictreas.springmvc.mapper.dtomapper.ProductDTOMapper;
-import per.budictreas.springmvc.repository.ProductRepository;
+import per.budictreas.springmvc.repository.MS.ProductRepository;
 
 import java.util.List;
 

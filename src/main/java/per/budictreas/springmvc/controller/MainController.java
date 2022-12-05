@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import per.budictreas.springmvc.common.Constant;
 import per.budictreas.springmvc.data.entity.RegistrationEntity;
 import per.budictreas.springmvc.data.requestmodel.RegisterFormRequestModel;
@@ -15,6 +16,7 @@ import per.budictreas.springmvc.service.UserAccountService;
 import per.budictreas.springmvc.validator.RegisterValidator;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,42 +39,56 @@ public class MainController {
         this.registerValidator = registerValidator;
     }
 
-    @RequestMapping(value = {"/", "login"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/", "login"})
     public ModelAndView getLoginPage() {
         return new ModelAndView("login");
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(HttpServletRequest request) {
+    @PostMapping(value = "/login")
+    public ModelAndView login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         String url = INVALID_PAGE;
-        RegistrationEntity registrationEntity = this.userAccountService.checkLogin(request.getParameter("username"), request.getParameter("password"));
+        RegistrationEntity registrationEntity = this.userAccountService.checkLogin(httpServletRequest.getParameter("username"), httpServletRequest.getParameter("password"));
         if (registrationEntity != null) {
             url = SEARCH_PAGE;
-            request.getSession().setAttribute(Constant.ATTR_USER, registrationEntity);
+            httpServletRequest.getSession().setAttribute(Constant.ATTR_USER, registrationEntity);
+            httpServletResponse.setHeader("Cache-Control", "no-cache, no-store");
         }
 
         return new ModelAndView(url);
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView logout(HttpSession session) {
-        if (session != null) session.invalidate();
-        return new ModelAndView(LOGIN_PAGE);
+    @GetMapping(value = "/search")
+    public ModelAndView renderSearchPage(HttpSession session, HttpServletResponse httpServletResponse) {
+        if (session.getAttribute(Constant.ATTR_USER) == null) return new ModelAndView(LOGIN_PAGE);
+        httpServletResponse.setHeader("Cache-Control", "no-cache, no-store");
+        return new ModelAndView(SEARCH_PAGE);
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @GetMapping(value = "/invalid")
+    public RedirectView renderInvalidPage() {
+        return new RedirectView(INVALID_PAGE);
+    }
+
+    @GetMapping(value = "/logout")
+    public RedirectView logout(HttpSession session) {
+        if (session != null) session.invalidate();
+        //return new ModelAndView("redirect:/" + LOGIN_PAGE);
+        return new RedirectView(LOGIN_PAGE);
+    }
+
+    @GetMapping(value = "/register")
     public ModelAndView getRegisterPage() {
         return new ModelAndView("register");
     }
 
-    @RequestMapping(value = "/register-taglib", method = RequestMethod.GET)
+    @GetMapping(value = "/register-taglib")
     public ModelAndView getRegisterTaglibPage() {
         Map<String, Object> map = new HashMap<>();
         map.put("user", new RegisterFormRequestModel());
         return new ModelAndView("register_taglib", map);
     }
 
-    @RequestMapping(value = "/registerTaglib_Action", method = RequestMethod.POST)
+    @PostMapping(value = "/registerTaglib_Action")
     public ModelAndView registerProcess(@ModelAttribute("user") @Validated RegisterFormRequestModel registerFormRequestModel,
                                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return new ModelAndView("register_taglib");
@@ -85,12 +101,12 @@ public class MainController {
         binder.addValidators(registerValidator);
     }
 
-    @GetMapping("/shop")
+    @GetMapping(value = "/shop")
     public ModelAndView getShopPage() {
         return new ModelAndView("shop");
     }
 
-    @GetMapping("/showCart")
+    @GetMapping(value = "/showCart")
     public ModelAndView getCartPage() {
         return new ModelAndView("cart");
     }

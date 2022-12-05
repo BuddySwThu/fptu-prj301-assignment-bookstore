@@ -12,15 +12,23 @@
               http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
     <context:component-scan base-package="per.budictreas.springmvc"/>
     <mvc:annotation-driven/>
-    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+    <bean name="MSSQLDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="username" value="sa"/>
         <property name="password" value="hiHihaHahoHoheHe21"/>
         <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
         <property name="url"
                   value="jdbc:sqlserver://localhost:1433;databaseName=PRJ301_MVC2;instanceName=BUDDY;useUnicode=true;characterEncoding=UTF-8"/>
     </bean>
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
+    <bean name="PostgreSQLDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="username" value="postgres"/>
+        <property name="password" value="hiHihaHahoHoheHe22"/>
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/SpringTutorial22"/>
+    </bean>
+
+    <bean id="msSQLEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="MSSQLDataSource"/>
         <property name="packagesToScan" value="per.budictreas.springmvc.data"/>
         <property name="persistenceProvider">
             <bean class="org.hibernate.jpa.HibernatePersistenceProvider"/>
@@ -36,12 +44,42 @@
             </props>
         </property>
     </bean>
-    <bean id="transactionManager" name="jpaTransactionManager"
-          class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <bean id="pgSQLEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="PostgreSQLDataSource"/>
+        <property name="packagesToScan" value="per.budictreas.springmvc.data"/>
+        <property name="persistenceProvider">
+            <bean class="org.hibernate.jpa.HibernatePersistenceProvider"/>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.show_sql">true</prop> <!-- false khi triển khai ứng dụng chạy thực tế.-->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</prop>
+                <prop key="hibernate.physical_naming_strategy">
+                    com.vladmihalcea.hibernate.type.util.CamelCaseToSnakeCaseNamingStrategy
+                </prop>
+            </props>
+        </property>
     </bean>
-    <tx:annotation-driven transaction-manager="jpaTransactionManager"/>
-    <jpa:repositories base-package="per.budictreas.springmvc.repository" entity-manager-factory-ref="entityManagerFactory"
-                      transaction-manager-ref="transactionManager"/>
+
+    <bean id="msSQLTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="msSQLEntityManagerFactory"/>
+    </bean>
+    <bean id="pgSQLTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="pgSQLEntityManagerFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="msSQLTransactionManager"/>
+    <tx:annotation-driven transaction-manager="pgSQLTransactionManager"/>
+
+    <jpa:repositories base-package="per.budictreas.springmvc.repository.PG"
+                      entity-manager-factory-ref="pgSQLEntityManagerFactory"
+                      transaction-manager-ref="pgSQLTransactionManager"/>
+    <jpa:repositories base-package="per.budictreas.springmvc.repository.MS"
+                      entity-manager-factory-ref="msSQLEntityManagerFactory"
+                      transaction-manager-ref="msSQLTransactionManager"/>
+    <!--    Lưu ý: Spring sẽ chọn cái xuất hiện sau cùng làm database cho các Inteface repository.
+                   Trong thực tế, khi sử dụng 2 database khác nhau, chúng ta cần phải đặt 2 interface ở 2 package khác nhau-->
+
     <context:component-scan base-package="per.budictreas.springmvc"/>
 </beans>

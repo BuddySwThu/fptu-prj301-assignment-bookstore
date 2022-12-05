@@ -1,4 +1,4 @@
-package per.budictreas.springmvc.repository;
+package per.budictreas.springmvc.repository.MS;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +13,6 @@ public interface UserAccountRepository extends JpaRepository<RegistrationEntity,
 
     List<RegistrationEntity> getByLastnameContainingIgnoreCase(String lastname);
 
-    @Transactional
+    @Transactional("msSQLTransactionManager")
     Integer deleteByUsername(String username);
 }

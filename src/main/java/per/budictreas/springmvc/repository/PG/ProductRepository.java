@@ -1,4 +1,4 @@
-package per.budictreas.springmvc.repository;
+package per.budictreas.springmvc.repository.PG;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
